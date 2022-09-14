@@ -1,0 +1,26 @@
+type TrendingCollections {
+    Edges: [Edges]!
+}
+
+type Edges {
+    Node: Node!
+}
+
+type Node {
+    Address: String!
+    Name: String!
+    Stats: Stats!
+    Symbol: String
+}
+
+type Stats {
+    TotalSales: Int!
+    Average: Float!
+    Ceiling: Float!
+    Floor: Float!
+    Volume: Float!
+}
+
+type Query {
+    getTrendingCollection(orderBy: String!, orderDirection: String!): TrendingCollections!
+}
