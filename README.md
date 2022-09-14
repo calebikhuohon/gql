@@ -31,6 +31,6 @@ query {
   }
 }
 ```
-Sample output: ![ graphql query output](https://github.com/calebikhuohon/gql/blob/main/graphql-query-output.png?raw=true)
+Sample output: ![ graphql query output](https://github.com/calebikhuohon/gql/blob/main/img/graphql-query-output.png?raw=true)
 
 
