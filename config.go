@@ -1,7 +1,7 @@
 package main
 
 type Config struct {
-	ApiKey string `envconfig:"API_KEY" required:"true" default:"b5c572d75e504a1282f5e10f7f5bceb5"`
+	ApiKey string `envconfig:"API_KEY" required:"true"`
 	Ports  struct {
 		GRAPHQL string `envconfig:"GRAPHQL_PORT" default:"8081"`
 	}

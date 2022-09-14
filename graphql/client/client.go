@@ -2,7 +2,6 @@ package client
 
 import (
 	"context"
-	"fmt"
 	"github.com/machinebox/graphql"
 )
 
@@ -62,7 +61,6 @@ func (c *Client) GetTrendingCollection() (TrendingCollections, error) {
   }`)
 
 	req.Header.Set("Cache-Control", "no-cache")
-	fmt.Println(c.ApiKey)
 	req.Header.Set("x-api-key", c.ApiKey)
 
 	ctx := context.Background()
@@ -75,7 +73,6 @@ func (c *Client) GetTrendingCollection() (TrendingCollections, error) {
 	if err := client.Run(ctx, req, &response.Data); err != nil {
 		return TrendingCollections{}, err
 	}
-	fmt.Println("res: ", response)
 
 	return response.Data.TrendingCollections, nil
 }

@@ -25,7 +25,6 @@ func main() {
 	signal.Notify(exit, os.Interrupt)
 
 	ctx, cancel := context.WithCancel(context.Background())
-	fmt.Println("here 1")
 
 	go func() {
 		systemCall := <-exit
@@ -40,7 +39,6 @@ func main() {
 	if err := config.Validate(); err != nil {
 		log.Fatalf("Failed to validate config: %s", err)
 	}
-	fmt.Println("here 2")
 
 	cli := client.NewClient(config.ApiKey)
 	gqlRouter := chi.NewRouter()
@@ -60,7 +58,6 @@ func main() {
 	srv.AddTransport(&transport.Websocket{
 		Upgrader: websocket.Upgrader{
 			CheckOrigin: func(r *http.Request) bool {
-				fmt.Println(r.Host)
 				return true
 			},
 			ReadBufferSize:  1024,
@@ -69,16 +66,13 @@ func main() {
 	})
 	gqlRouter.Handle("/query", srv)
 	gqlRouter.Handle("/query/playground", playground.Handler("GraphQL playground", "/query"))
-	fmt.Println("here 3")
 	go func() {
 		log.Print("starting graphql server...")
 		if err := http.ListenAndServe(fmt.Sprintf(":%s", config.Ports.GRAPHQL), gqlRouter); err != nil {
 			log.Printf("Could not listen and serve: %s", err)
 			os.Exit(1)
 		}
-		fmt.Println("here 4")
 	}()
-	fmt.Println("here 64")
 	<-ctx.Done()
 
 	log.Print("Stopping the graphql server..")

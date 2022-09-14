@@ -5,7 +5,6 @@ package server
 
 import (
 	"context"
-	"fmt"
 	"github.com/vektah/gqlparser/v2/gqlerror"
 	"quicknode/graphql/pkg/middleware"
 	"quicknode/graphql/server/generated"
@@ -18,12 +17,10 @@ func (r *queryResolver) GetTrendingCollection(ctx context.Context, orderBy strin
 		return nil, gqlerror.Errorf("user not authenticated")
 	}
 
-	fmt.Println("here 5")
 	trendingCols, err := r.Client.GetTrendingCollection()
 	if err != nil {
 		return nil, gqlerror.Errorf("failed to get trending collections")
 	}
-	fmt.Println("here 6")
 	result := &model.TrendingCollections{
 		Edges: make([]*model.Edges, 0),
 	}
